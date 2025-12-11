@@ -22,19 +22,19 @@ void Renderer::SetBuffers() {
 	width = renderCam->GetViewPortWidth();
 	height = renderCam->GetViewPortHeight();
 
+	/*
 	ImageHorizontalIter.resize(width);
 
 	for (uint32_t i = 0; i < width; i++) {
 		ImageHorizontalIter[i] = i;
 	}
+	*/
 
-	/*
 	ImageVerticalIter.resize(height);
 	
 	for (uint32_t j = 0; j < height; j++) {
 		ImageVerticalIter[j] = j;
 	}
-	*/
 
 	ImageData.resize((uint64_t)(width * height));
 	AccumImageData.resize((uint64_t)(width * height));
@@ -51,7 +51,7 @@ void Renderer::Render(const Scene& scene, Camera& camera) {
 
 		#if MT == 1
 
-		std::for_each(std::execution::par, ImageHorizontalIter.begin(), ImageHorizontalIter.end(),
+		std::for_each(std::execution::par, ImageVerticalIter.begin(), ImageVerticalIter.end(),
 			[this](uint32_t y) {
 				for (uint32_t x = 0; x < width; x++) {
 
